@@ -19,22 +19,23 @@
     </section>
     <section>
       <h2>Google data accessed</h2>
-      <p>With the account owner's authorization, the assistant can access Gmail message contents, headers, recipients and related metadata to find and summarize mail or prepare replies. It can send email on the owner's behalf. It can read Google Calendar event details and create, update or delete events, including associated dates, locations, descriptions and attendees.</p>
-      <p>The connection requests the Gmail read-only, Gmail send, and Calendar events OAuth permissions. OAuth credentials enable access without giving the assistant the owner's Google password.</p>
+      <p>With the account owner's authorization, the assistant can access Gmail message contents, headers, recipients and related metadata to find and summarize mail or prepare replies. It can read Google Calendar event details, including dates, locations, descriptions and attendees, and prepare proposed event changes. Email sending and calendar changes are not currently enabled.</p>
+      <p>The base connection requests the Gmail read-only (<code>gmail.readonly</code>), Gmail send (<code>gmail.send</code>), and Calendar events (<code>calendar.events</code>) OAuth permissions. The latter two permissions allow sending email and changing events, although those actions are not currently enabled in this installation.</p>
+      <p>Optional inbox management requires additional consent for Gmail modify (<code>gmail.modify</code>) and basic settings (<code>gmail.settings.basic</code>). These permissions allow broader mailbox and settings changes. The enabled actions are limited to archiving selected messages and creating or removing archive-only filters; the integration can also read supported filters and message metadata to prepare accurate previews. OAuth credentials enable access without giving the assistant the owner's Google password.</p>
     </section>
     <section>
       <h2>How data is used and shared</h2>
       <p>Google data is used to fulfill the owner's email, scheduling and personal administration requests. Relevant content may be sent to OpenAI for model inference. Responses, summaries and notifications may be delivered through Telegram. The assistant runtime and working data are hosted on DigitalOcean. These service providers process information under their respective policies.</p>
       <p>The operator does not sell Google user data, use it for advertising, or use it to train generalized artificial-intelligence or machine-learning models. The use and transfer of information received from Google APIs will adhere to the <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services User Data Policy</a>, including its Limited Use requirements.</p>
-      <p>Sending email or creating events with attendees can disclose their contents to the recipients or attendees selected for that action.</p>
+      <p>Inbox action previews and completion notices are delivered through a private Telegram approval conversation. Each archive action or filter change requires the owner's explicit approval. An approved filter then archives future matching incoming messages automatically in Gmail until it is removed. Creating a filter does not archive existing messages, and removing one does not restore previously archived messages to the inbox.</p>
     </section>
     <section>
       <h2>Storage and retention</h2>
-      <p>OAuth credentials are stored on the private agent server with restricted file access. Retrieved content and generated summaries may be retained in the assistant's conversation history, memory, working files or logs until the owner removes them. There is currently no fixed automatic deletion period for those records. Google, OpenAI, Telegram and the hosting provider maintain their own retention practices.</p>
+      <p>OAuth credentials are stored encrypted on the private server with restricted access. Retrieved content, generated summaries, action previews and execution records may be retained in conversation history, memory, working files, approval records or logs until the owner removes them. There is currently no fixed automatic deletion period for those records. Google, OpenAI, Telegram and the hosting provider maintain their own retention practices.</p>
     </section>
     <section>
       <h2>Control, revocation and deletion</h2>
-      <p>The owner can revoke the integration through <a href="https://myaccount.google.com/connections">Google Account connections</a>. Revocation prevents future access through that authorization but does not automatically delete information already stored by the assistant or messages already sent. The owner can remove the assistant's saved credentials, conversation history, memories and working files on the private server, and manage retained messages through the relevant service.</p>
+      <p>The owner can revoke the integration through <a href="https://myaccount.google.com/connections">Google Account connections</a>. Revocation prevents future API access through that authorization but does not remove filters already created in Gmail, undo earlier mailbox changes, or delete information already stored by the assistant. To stop an existing automatic rule, remove the filter in Gmail or approve its removal through the integration while access remains connected. The owner can remove saved credentials, conversation history, memories, working files and approval records on the private server, and manage retained messages through the relevant service.</p>
     </section>
     <section>
       <h2>This website and contact</h2>
